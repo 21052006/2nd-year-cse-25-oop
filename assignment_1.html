@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ASSIGNMENT_1</title>
+    <style>
+        .question {
+            font-size: 24px;
+        }
+        .answer button {
+            padding: 5px;
+            width: 50px;
+            background-color: black;
+            color: aliceblue;
+            border: 2px solid aliceblue;
+            position: relative;
+            left: 95%;
+            top: 45px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .answer button:active {
+            background-color: cadetblue;
+            border-color: black;
+        }
+        pre {
+            background-color: black;
+            color: aliceblue;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    
+	<div class=LE_01_basic_structures.cpp>
+		<div class='question'>WAP to input name, roll number and marks in 5 subjects for a student, and display it.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+struct student {
+    string name;
+    int roll;
+    float marks[5];
+};
+
+int main() {
+    student s;
+    cout &lt;&lt; "Name: ";
+    cin &gt;&gt; s.name;
+    cout &lt;&lt; "Roll No.: ";
+    cin &gt;&gt; s.roll;
+    cout &lt;&lt; "Marks in all subjects 1 by 1: ";
+    cin &gt;&gt; s.marks[0] &gt;&gt; s.marks[1] &gt;&gt; s.marks[2] &gt;&gt; s.marks[3] &gt;&gt; s.marks[4];
+    cout &lt;&lt; "\n\nName: " &lt;&lt; s.name &lt;&lt; "\nRoll No.: " &lt;&lt; s.roll;
+    cout &lt;&lt; "\nMarks in " &lt;&lt; 1 &lt;&lt; " subject " &lt;&lt; s.marks[0];
+    cout &lt;&lt; "\nMarks in " &lt;&lt; 2 &lt;&lt; " subject " &lt;&lt; s.marks[1];
+    cout &lt;&lt; "\nMarks in " &lt;&lt; 3 &lt;&lt; " subject " &lt;&lt; s.marks[2];
+    cout &lt;&lt; "\nMarks in " &lt;&lt; 4 &lt;&lt; " subject " &lt;&lt; s.marks[3];
+    cout &lt;&lt; "\nMarks in " &lt;&lt; 5 &lt;&lt; " subject " &lt;&lt; s.marks[4];
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LE_02_structure_array.cpp>
+		<div class='question'>WAP to input name, roll number and marks in 5 subjects for n number of students. Write functions to:- <br />
+            a. Find total marks and percentage of all n students. <br />
+            b. Display details of a student with a given roll number. <br />
+            c. Display the details for all the students having percentage in a given range. <br />
+            d. Sort the array in ascending order of marks. 
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+struct student {
+    string name;
+    int roll;
+    float marks[5], total = 0, per;
+};
+
+void calc(student *s) {
+    for (int i = 0;i&lt;5;i++) {
+        s-&gt;total+=s-&gt;marks[i];
+    }
+    s-&gt;per = s-&gt;total/5;
+}
+
+void display_data(student s) {
+    cout &lt;&lt; "\n\nName: " &lt;&lt; s.name &lt;&lt; "\nRoll No.: " &lt;&lt; s.roll;
+    cout &lt;&lt; "\nTotal Marks: " &lt;&lt; s.total;
+    cout &lt;&lt; "\nPercentage: " &lt;&lt; s.per;
+}
+
+void display_roll(int roll, student s[], int n) {
+    for (int i = 0;i&lt;n;i++) {
+        if (roll == s[i].roll) {
+            display_data(s[i]);
+            break;
+        }
+    }
+}
+
+void display_range(int l, int r, student s[], int n) {
+    int f = 1;
+    for (int i = 0;i&lt;n;i++) {
+        if (s[i].per &gt;= l && s[i].per &lt;= r) {
+            f = 0;
+            display_data(s[i]);
+        }
+    }
+    if (f) {
+        cout &lt;&lt; "\nNo data found";
+    }
+}
+
+void sort(student s[], int n) {
+    for (int i = 0;i&lt;n;i++) {
+        for (int j = i+1;j&lt;n;j++) {
+            if (s[i].total&gt;s[j].total) {
+                student t = s[i];
+                s[i] = s[j];
+                s[j] = t;
+            }
+        }
+    }
+}
+
+int main() {
+    int n;
+    cout &lt;&lt; "Enter Number of student: ";
+    cin &gt;&gt; n;
+    student s[n];
+    for (int i = 0;i&lt;n;i++) {
+        cout &lt;&lt; "\n\nEnter Information of " &lt;&lt; i+1 &lt;&lt; " student:";
+        cout &lt;&lt; "\n\tName: ";
+        cin &gt;&gt; s[i].name;
+        cout &lt;&lt; "\tRoll No.: ";
+        cin &gt;&gt; s[i].roll;
+        cout &lt;&lt; "\tEnter the marks in maths physics biology chemistry computer: ";
+        for (int j = 0;j&lt;5;j++) {
+            cin &gt;&gt; s[i].marks[j];
+        }
+        calc(&s[i]);
+    }
+    sort(s, n);
+    while (1) {
+        int z;
+        cout &lt;&lt; "\n\npress 1 for display details with roll no\npres 2 for display details within the given range\npress 3 to see all the data\nany other to exit\nyour input: ";
+        cin &gt;&gt; z;
+        if (z == 1) {
+            cout &lt;&lt; "\n\nEnter the roll number to search for: ";
+            int r;
+            cin &gt;&gt; r;
+            display_roll(r, s, n);
+        } else if (z == 2) {
+            int l, r;
+            cout &lt;&lt; "Enter lower and upper range: ";
+            cin &gt;&gt; l &gt;&gt; r;
+            display_range(l, r, s, n);
+        }else if (z == 3) {
+            for (int i = 0;i&lt;n;i++) {
+                display_data(s[i]);
+            }
+        } else {
+            break;
+        }
+    }
+    cout &lt;&lt; "Exit...";
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LE_03_pointer_with_structures.cpp>
+		<div class='question'>WAP to enter id, name, age and basic salary of n number of employees. Calculate the gross salary of all the employees and display it along with all other details in a
+            tabular form, using pointer to structure. <br />
+            [ <br />
+                Gross salary= Basic salary + DA + HRA <br />
+                DA = 80% of Basic salary <br />
+                HRA=10% of Basic salary <br />
+            ]
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+struct employee {
+    int id, age;
+    string name;
+    float gross, da, hra, basic_salary;
+};
+
+void calc(employee *s) {
+    s-&gt;da = (80/100.0)*s-&gt;basic_salary;
+    s-&gt;hra = (10/100.0)*s-&gt;basic_salary;
+    s-&gt;gross = s-&gt;hra + s-&gt;da + s-&gt;basic_salary;
+}
+
+void display_data(employee s) {
+    cout &lt;&lt; "\n" &lt;&lt; s.id;
+    cout &lt;&lt; "\t" &lt;&lt; s.name;
+    cout &lt;&lt; "\t" &lt;&lt; s.age;
+    cout &lt;&lt; "\t" &lt;&lt; s.basic_salary;
+    cout &lt;&lt; "\t\t" &lt;&lt; s.gross;
+}
+
+int main() {
+    int n;
+    cout &lt;&lt; "Enter numbers of employee: ";
+    cin &gt;&gt; n;
+    employee e[n];
+    for (int i = 0;i&lt;n;i++) {
+        cout &lt;&lt; "enter information of " &lt;&lt; i+1 &lt;&lt; " employee: ";
+        cout &lt;&lt; "\n\tid: ";
+        cin &gt;&gt; e[i].id;
+        cout &lt;&lt; "\tname: ";
+        cin &gt;&gt; e[i].name;
+        cout &lt;&lt; "\tage: ";
+        cin &gt;&gt; e[i].age;
+        cout &lt;&lt; "\tbasic_salary: ";
+        cin &gt;&gt; e[i].basic_salary;
+        calc(&e[i]);
+    }
+    cout &lt;&lt; "\n\n\nid\tName\tage\tbasic_salary\tgross";
+    for (int i = 0;i&lt;n;i++) {
+        display_data(e[i]);
+    }
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+<script>
+    var btn = document.getElementsByTagName('button');
+    for (var i = 0;i<btn.length;i++) {
+        btn[i].addEventListener('click', function () {
+            var copyText = this.nextElementSibling.textContent;
+            var n = document.createElement('input');
+            n.value = copyText;
+            n.select();
+            n.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(n.value);
+            n.remove();
+        })
+    }
+</script>
+</body>
+</html>
