@@ -256,8 +256,14 @@ int main() {
     var btn = document.getElementsByTagName('button');
     for (var i = 0;i<btn.length;i++) {
         btn[i].addEventListener('click', function () {
-            navigator.clipboard.writeText(this.nextElementSibling.textContent);
-            alert('Copying Successful!!');
+            var copyText = this.nextElementSibling.textContent;
+            var n = document.createElement('input');
+            n.value = copyText;
+            n.select();
+            n.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(n.value);
+            alert('copied' + this.nextElementSibling.textContent);
+            n.remove();
         })
     }
 </script>
