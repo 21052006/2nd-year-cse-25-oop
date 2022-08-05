@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>assignment_2</title>
+    <style>
+        .question {
+            font-size: 24px;
+        }
+        .answer button {
+            padding: 5px;
+            width: 50px;
+            background-color: black;
+            color: aliceblue;
+            border: 2px solid aliceblue;
+            position: relative;
+            left: 95%;
+            top: 45px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .answer button:active {
+            background-color: cadetblue;
+            border-color: black;
+        }
+        pre {
+            background-color: black;
+            color: aliceblue;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    
+	<div class=LA_01_hello_name.cpp>
+		<div class='question'>WAP to display the message "hello" followed by your name on screen.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+int main() {
+    string name;
+    cout &lt;&lt; "What is your name ?\n";
+    getline(cin, name);
+    cout &lt;&lt; "hello " &lt;&lt; name;
+    return 1;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_02_student.cpp>
+		<div class='question'>Create a class which stores name, roll number and total marks for a student. Input the data for a student and display it. 
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class student {
+    string name;
+    int roll;
+    float total_marks;
+    public:
+        void input() {
+            cout &lt;&lt; "Name: ";
+            cin.ignore();
+            getline(cin, name);
+            cout &lt;&lt; "Roll No.: ";
+            cin &gt;&gt; roll;
+            cout &lt;&lt; "Total marks: ";
+            cin &gt;&gt; total_marks;
+        }
+        void display() {
+            cout &lt;&lt; "\n\n\nName: " &lt;&lt; name &lt;&lt; endl;
+            cout &lt;&lt; "Roll No.: " &lt;&lt; roll &lt;&lt; endl;
+            cout &lt;&lt; "Total Marks: " &lt;&lt; total_marks &lt;&lt; endl;
+        }
+};
+
+int main() {
+    student s;
+    s.input();
+    s.display();
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_03_student_marks_array.cpp>
+		<div class='question'>Modify the program (2) to store marks in 5 subjects. Calculate the total marks and percentage of a student and display it. 
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class student {
+    string name;
+    int roll;
+    float total_marks = 0, marks[5], per;
+    public:
+        void input() {
+            cout &lt;&lt; "Name: ";
+            getline(cin, name);
+            cout &lt;&lt; "Roll No.: ";
+            cin &gt;&gt; roll;
+            for (int i = 0;i&lt;5;i++) {
+                cout &lt;&lt; "Marks in " &lt;&lt; i+1 &lt;&lt; " subject: ";
+                cin &gt;&gt; marks[i];
+                total_marks+=marks[i];
+            }
+            per = total_marks/5.0;
+        }
+        void display() {
+            cout &lt;&lt; "\n\n\nName: " &lt;&lt; name &lt;&lt; endl;
+            cout &lt;&lt; "Roll No.: " &lt;&lt; roll &lt;&lt; endl;
+            cout &lt;&lt; "Total Marks: " &lt;&lt; total_marks &lt;&lt; endl;
+            cout &lt;&lt; "Percentage: " &lt;&lt; per &lt;&lt; endl;
+        }
+};
+
+int main() {
+    student s;
+    s.input();
+    s.display();
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_04_complex_number.cpp>
+		<div class='question'>Create a class complex which stores real and imaginary part of a complex number. Input 10 complex numbers and display them. 
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class complex {
+    int real, img;
+    public:
+        void input() {
+            cout &lt;&lt; "a + bi\nEnter value for a: ";
+            cin &gt;&gt; real;
+            cout &lt;&lt; "Enter value for b: ";
+            cin &gt;&gt; img;
+        }
+        void display() {
+            cout &lt;&lt; real &lt;&lt; " + " &lt;&lt; img &lt;&lt; "i" &lt;&lt; endl;
+        }
+};
+
+int main() {
+    int n = 10;
+    complex c[n];
+    for(int i = 0;i&lt;n;i++) {
+        cout &lt;&lt; "Enter data number " &lt;&lt; i+1 &lt;&lt; "\n";
+        c[i].input();
+    }
+    cout &lt;&lt; "\n\n\n\n\n\nDisplaying\n";
+    for (int i = 0;i&lt;n;i++) {
+        cout &lt;&lt; i+1 &lt;&lt; ". ";
+        c[i].display();
+    }
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_05_distance.cpp>
+		<div class='question'>Create a class distance which stores a distance in feet and inches. Input 2 distance values in objects, add them, store the resultant distance in and object and display it. Write the above program in two ways: - <br />a) store the resultant distance in the calling object:C3.add(C1,C2)<br />b) return the resultant object C3=C1.add(C2)
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class __distance__ {
+    int feet, inches;
+    public: 
+        void input() {
+            cout &lt;&lt; "Feet: ";
+            cin &gt;&gt; feet;
+            cout &lt;&lt; "Inches: ";
+            cin &gt;&gt; inches;
+            if (inches&gt;12) {
+                feet+=(inches/12);
+                inches%=12;
+            }
+        }
+
+        void display() {
+            cout &lt;&lt; feet &lt;&lt; " ft " &lt;&lt; inches &lt;&lt; " inches\n";
+        }
+
+        void add(__distance__ a, __distance__ b) {
+            feet = a.feet + b.feet;
+            inches = a.inches + b.inches;
+            if (inches&gt;12) {
+                feet+=(inches/12);
+                inches%=12;
+            }
+        }
+        
+        __distance__ add(__distance__ a) {
+            __distance__ temp;
+            temp.feet = a.feet + feet;
+            temp.inches = a.inches + inches;
+            if (temp.inches&gt;12) {
+                temp.feet+=(temp.inches/12);
+                temp.inches%=12;
+            }
+            return temp;
+        }
+};
+
+int main() {
+    __distance__ a, b, c;
+    a.input();
+    a.display();
+    b.input();
+    b.display();
+    // c.add(a, b);
+    // c.display();
+    c = a.add(b);
+    c.display();
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_06_employee.cpp>
+		<div class='question'>Create a class which stores id, name, age and basic salary of an employee. Input data for n number of employees. Calculate the gross salary of all the employees and display it along with all other details in a tabular form. <br />[<br />&nbsp;&nbsp;&nbsp;&nbsp;Gross salary= Basic salary + DA + HRA,<br />&nbsp;&nbsp;&nbsp;&nbsp;DA = 80% of Basic salary,<br />&nbsp;&nbsp;&nbsp;&nbsp;HRA=10% of Basic salary<br />]
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include &lt;iostream&gt;
+using namespace std;
+
+class employee {
+    int id, age;
+    string name;
+    float b_salary, da, hra, gross;
+    public:
+        void input(void) {
+            cout &lt;&lt; "Enter name:";
+            cin.ignore();
+            getline(cin, name);
+            cout &lt;&lt; "Enter id:";
+            cin &gt;&gt; id;
+            cout &lt;&lt; "Enter age:";
+            cin &gt;&gt; age;
+            cout &lt;&lt; "Enter basic salary:";
+            cin &gt;&gt; b_salary;
+        }
+        void calculate(void) { 
+            da = (80 / 100.0) * b_salary;
+            hra = (10 / 100.0) * b_salary;
+            gross = b_salary + da + hra;
+        }
+        void output(void) {
+            cout &lt;&lt; "\tName: " &lt;&lt; name &lt;&lt; "\tID: " &lt;&lt; id &lt;&lt; "\tAge: " &lt;&lt; age &lt;&lt; "\tGross Salary: " &lt;&lt; gross &lt;&lt; endl;
+        }
+};
+
+int main() {
+    int n;
+    cout &lt;&lt; "Enter no. of employees: ";
+    cin &gt;&gt; n;
+    class employee e[n];
+    for (int i = 0; i &lt; n; i++) {
+        e[i].input();
+        e[i].calculate();
+    }
+    cout &lt;&lt; "Displaying\n";
+    for (int i = 0; i &lt; n; i++) {
+        e[i].output();
+    }
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_07_.cpp>
+		<div class='question'>Create a class which stores x and y coordinates of a point. Calculate distance between two given points and display it.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+#include&lt;math.h&gt;
+using namespace std;
+
+class point {
+    public:
+        int x, y;
+};
+
+float distance(point a, point b) {
+    return sqrtf(pow(a.x-b.x, 2) + pow(a.y-b.y, 2));
+}
+
+int main() {
+    point _1, _2;
+    cout &lt;&lt; "Enter coordinates of 1st point: ";
+    cin &gt;&gt; _1.x &gt;&gt; _1.y;
+    cout &lt;&lt; "Enter coordinates of 2nd point: ";
+    cin &gt;&gt; _2.x &gt;&gt; _2.y;
+    cout &lt;&lt; "Distance = ";
+    cout &lt;&lt; distance(_1, _2);
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+<script>
+    var btn = document.getElementsByTagName('button');
+    for (var i = 0;i<btn.length;i++) {
+        btn[i].addEventListener('click', function () {
+            var copyText = this.nextElementSibling.textContent;
+            var n = document.createElement('input');
+            n.value = copyText;
+            n.select();
+            n.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(n.value);
+            n.remove();
+        })
+    }
+</script>
+</body>
+</html>
