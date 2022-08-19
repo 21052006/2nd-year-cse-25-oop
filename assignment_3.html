@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ASSIGNMENT_3</title>
+    <style>
+        .question {
+            font-size: 24px;
+        }
+        .answer button {
+            padding: 5px;
+            width: 50px;
+            background-color: black;
+            color: aliceblue;
+            border: 2px solid aliceblue;
+            position: relative;
+            left: 95%;
+            top: 45px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .answer button:active {
+            background-color: cadetblue;
+            border-color: black;
+        }
+        pre {
+            background-color: black;
+            color: aliceblue;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    
+	<div class=LA_01.cpp>
+		<div class='question'>WAP to find area of a circle, a rectangle and a triangle, using concept of function overloading.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+#include&lt;math.h&gt;
+using namespace std;
+
+double area(double radius) {
+    return 3.14*radius*radius;
+}
+
+double area(double length, double breadth) {
+    return length * breadth;
+}
+
+double area(double a, double b, double c) {
+    double s = (a+b+c)/2;
+    return sqrt(s*(s-a)*(s-b)*(s-c));
+}
+
+int main() {
+    cout &lt;&lt; area(12) &lt;&lt; endl;
+    cout &lt;&lt; area(12, 14.1) &lt;&lt; endl;
+    cout &lt;&lt; area(12, 14, 18) &lt;&lt; endl;
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_02.cpp>
+		<div class='question'> WAP to find volume of a sphere, a cylinder and a cuboid, using function overloading.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+double volume(double radius) {
+    return (4/3)*3.14*radius*radius*radius;
+}
+
+double volume(double radius, double height) {
+    return 3.14*radius*radius*height;
+}
+
+double volume(double length, double breadth, double height) {
+    return length*breadth*height;
+}
+
+int main() {
+    cout &lt;&lt; volume(10) &lt;&lt; endl;
+    cout &lt;&lt; volume(10, 20) &lt;&lt; endl;
+    cout &lt;&lt; volume(10, 30, 40) &lt;&lt; endl;
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_03_1.cpp>
+		<div class='question'>WAP which displays a given character, n number of times, using a function. When the n value is not provided, it should print the given character 80 times. When both the character and n value is not provided, it should print ‘*’ character 80 times. [using function overloading.]
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include &lt;iostream&gt;
+using namespace std;
+
+void display() {
+    for (int i = 0;i&lt;80;i++) {
+        cout &lt;&lt; '*';
+    }
+    cout &lt;&lt; endl;
+}
+
+void display(int n) {
+    for (int i = 0;i&lt;n;i++) {
+        cout &lt;&lt; '*';
+    }
+    cout &lt;&lt; endl;
+}
+
+void display(char c) {
+    for (int i = 0;i&lt;80;i++) {
+        cout &lt;&lt; c;
+    }
+    cout &lt;&lt; endl;
+}
+
+void display(char c,int n) {
+    for (int i = 0;i&lt;n;i++) {
+        cout &lt;&lt; c;
+    }
+    cout &lt;&lt; endl;
+}
+
+void display(int n, char c) {
+    for (int i = 0;i&lt;n;i++) {
+        cout &lt;&lt; c;
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    display();
+    display('#', 30);
+    display('#');
+    display(30);
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_03_2.cpp>
+		<div class='question'>WAP which displays a given character, n number of times, using a function. When the n value is not provided, it should print the given character 80 times. When both the character and n value is not provided, it should print ‘*’ character 80 times. [ using default arguments.]
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include &lt;iostream&gt;
+using namespace std;
+
+void display(char c = '*', int n = 80) {
+    for (int i = 0;i&lt;n;i++) {
+        cout &lt;&lt; c;
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    display();
+    display('#', 30);
+    display('#');
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_04.cpp>
+		<div class='question'>WAP to find square and cube of a number using inline function.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+inline double square(double n) {
+    return n*n;
+}
+
+inline double cube(double n) {
+    return n*n*n;
+}
+
+int main() {
+    cout &lt;&lt; square(10) &lt;&lt; endl;
+    cout &lt;&lt; cube(10) &lt;&lt; endl;
+    char a;
+    cin &gt;&gt; a;
+    cout &lt;&lt; a &lt;&lt; "aa";
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_05.cpp>
+		<div class='question'>WAP to swap two integers using pass by reference.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+int main() {
+    int a, b;
+    a = 10;
+    b = 20;
+    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;
+    swap(a, b);
+    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA_06.cpp>
+		<div class='question'>WAP to increment the value of an argument given to function.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>// WAP to increment the value of an argument given to function.
+#include&lt;iostream&gt;
+using namespace std;
+
+int increment(int a) {
+    return ++a;
+}
+
+int main() {
+    int a = 10;
+    cout &lt;&lt; a &lt;&lt; endl;
+    a = increment(a);
+    cout &lt;&lt; a &lt;&lt; endl;
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+<script>
+    var btn = document.getElementsByTagName('button');
+    for (var i = 0;i<btn.length;i++) {
+        btn[i].addEventListener('click', function () {
+            var copyText = this.nextElementSibling.textContent;
+            var n = document.createElement('input');
+            n.value = copyText;
+            n.select();
+            n.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(n.value);
+            n.remove();
+        })
+    }
+</script>
+</body>
+</html>
