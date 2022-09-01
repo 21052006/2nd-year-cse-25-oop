@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Assignment 4</title>
+    <style>
+        .question {
+            font-size: 24px;
+        }
+        .answer button {
+            padding: 5px;
+            width: 50px;
+            background-color: black;
+            color: aliceblue;
+            border: 2px solid aliceblue;
+            position: relative;
+            left: 95%;
+            top: 45px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .answer button:active {
+            background-color: cadetblue;
+            border-color: black;
+        }
+        pre {
+            background-color: black;
+            color: aliceblue;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    
+	<div class=LAB04_1.cpp>
+		<div class='question'>WAP to swap private data member of two classes. [The classes have no relation with each other].
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class _c2;
+class _c1;
+
+class _c1 {
+    int a = 10;
+    public:
+        friend void swap(_c1&, _c2&);
+        void display() {
+            cout &lt;&lt; "_c1: " &lt;&lt; a &lt;&lt; endl;
+        }
+};
+
+class _c2 {
+    int a = 20;
+    public:
+        friend void swap(_c1&, _c2&);
+        void display() {
+            cout &lt;&lt; "_c2: " &lt;&lt; a &lt;&lt; endl;
+        }
+};
+
+void swap(_c1 &a, _c2 &b) {
+    int temp = a.a;
+    a.a = b.a;
+    b.a = temp;
+}
+
+int main() {
+    _c1 a;
+    _c2 b;
+    cout &lt;&lt; "Original Value: \n\t";
+    a.display();
+    cout &lt;&lt; "\t";
+    b.display();
+    swap(a, b);
+    cout &lt;&lt; "After Swap: \n\t";
+    a.display();
+    cout &lt;&lt; "\t";
+    b.display();
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LAB04_2.cpp>
+		<div class='question'>Create two classes which stores distance in feet, inches and meter, centimeter format respectively. Write a function which compares distance in object of these classes and displays the larger one.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class _m1;
+class _m2;
+
+class _m1 {
+    int feet, inches;
+    public:
+        friend int compare(_m1, _m2);
+        void display() {
+            cout &lt;&lt; feet+(inches/12) &lt;&lt; " feet " &lt;&lt; (inches%12) &lt;&lt; " inches" &lt;&lt; endl;
+        }
+        void input() {
+            cin &gt;&gt; feet &gt;&gt; inches;
+        }
+};
+
+class _m2 {
+    int meter, centimeter;
+    public:
+        friend int compare(_m1, _m2);
+        void display() {
+            cout &lt;&lt; meter+(centimeter/100) &lt;&lt; " meter " &lt;&lt; (centimeter%100) &lt;&lt; " centimeter" &lt;&lt; endl;
+        }
+        void input() {
+            cin &gt;&gt; meter &gt;&gt; centimeter;
+        }
+};
+
+int compare(_m1 b, _m2 a) {
+    a.meter = ((a.meter*100)+a.centimeter)*2.54;
+    b.feet = b.inches + (b.feet*12);
+    if (a.meter &gt; b.feet) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int main() {
+    _m1 a;
+    _m2 b;
+    a.input();
+    b.input();
+    if (compare(a, b)) {
+        b.display();
+    } else {
+        a.display();
+    }
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LAB04_3.cpp>
+		<div class='question'>Create a class with an integer data member. Include functions for input and output in class. Count the number of times each function is called and display it.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class _c1 {
+    static int count_1, count_2;
+    int age;
+    public:
+        void input() {
+            count_1++;
+            cin &gt;&gt; age; 
+        }
+        void display() {
+            count_2++;
+            cout &lt;&lt; age &lt;&lt; endl;
+        }
+        void display_count() {
+            cout &lt;&lt; "\n\n\nInput is called " &lt;&lt; count_1 &lt;&lt; " number of times.\nOutput is called " &lt;&lt; count_2 &lt;&lt; " number of times." &lt;&lt; endl;
+        }
+};
+int _c1::count_1;
+int _c1::count_2;
+
+int main() {
+    cout &lt;&lt; "1 For input\n2 For display\nAny other key to exit\nYour input: ";
+    _c1 a;
+    while (1) {
+        int z;
+        cin &gt;&gt; z;
+        if (z == 1) {
+            a.input();
+        } else if (z == 2) {
+            a.display();
+        } else {
+            break;
+        }
+    }
+    a.display_count();
+    return 1;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LAB04_4.cpp>
+		<div class='question'>Create a class which stores name, roll number and total marks for a student. Input data for n students. Find the average marks scored by n students, store it as a data member of the class and display it using a function which may be called without object.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class student {
+    static int avg, counter;
+    string name;
+    int roll;
+    float total_marks;
+    public:
+        friend float display(student);
+        void input() {
+            cin &gt;&gt; name &gt;&gt; roll &gt;&gt; total_marks;
+            counter++;
+            avg+=total_marks;
+        }
+};
+int student::avg;
+int student::counter;
+float display(student s) {
+    s.avg/=s.counter;
+    cout &lt;&lt; s.avg &lt;&lt; endl;
+}
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    student s[n];
+    for (int i = 0;i&lt;n;i++) {
+        s[i].input();
+    }
+    display(s[0]);
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LAB04_5.cpp>
+		<div class='question'>Create a class which stores name, author and price of a book. Store information for n number of books. Display information of all the books in a given price range using friend function.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class books{
+    string name, author;
+    float price;
+    public:
+        friend void compare(books[], int n);
+        void input() {
+            cout &lt;&lt; "Enter the name of book, author of the book and price of the book: ";
+            cin &gt;&gt; name &gt;&gt; author &gt;&gt; price;
+        }
+};
+
+void compare(books b[], int n) {
+    int low, high, flag = 1;
+    cout &lt;&lt; "Enter the lower range and upper range: ";
+    cin &gt;&gt; low &gt;&gt; high;
+    for (int i = 0;i&lt;n;i++) {
+        if (b[i].price&gt;=low && b[i].price&lt;=high) {
+            cout &lt;&lt; b[i].name &lt;&lt; " " &lt;&lt; b[i].author &lt;&lt; " " &lt;&lt; b[i].price &lt;&lt; endl;
+            flag = 0;
+        }
+    }
+    if (flag)
+        cout &lt;&lt; "No books found in given range";
+}
+
+int main() {
+    int n;
+    cout &lt;&lt; "Enter number of books: ";
+    cin &gt;&gt; n;
+    books b[n];
+    for (int i = 0;i&lt;n;i++) {
+        b[i].input();
+    }
+    compare(b, n);
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+<script>
+    var btn = document.getElementsByTagName('button');
+    for (var i = 0;i<btn.length;i++) {
+        btn[i].addEventListener('click', function () {
+            var copyText = this.nextElementSibling.textContent;
+            var n = document.createElement('input');
+            n.value = copyText;
+            n.select();
+            n.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(n.value);
+            n.remove();
+        })
+    }
+</script>
+</body>
+</html>
