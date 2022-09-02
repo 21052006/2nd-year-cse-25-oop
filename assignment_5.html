@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Assignment 5</title>
+    <style>
+        .question {
+            font-size: 24px;
+        }
+        .answer button {
+            padding: 5px;
+            width: 50px;
+            background-color: black;
+            color: aliceblue;
+            border: 2px solid aliceblue;
+            position: relative;
+            left: 95%;
+            top: 45px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .answer button:active {
+            background-color: cadetblue;
+            border-color: black;
+        }
+        pre {
+            background-color: black;
+            color: aliceblue;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    
+	<div class=LA05_1.cpp>
+		<div class='question'>i. Create a class complex which stores real and imaginary part of a complex number. Include all types of constructors and destructor. The destructor should display a message about the destructor being invoked. Create objects using different constructors and display them.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class complex {
+    int real, imaginary;
+    public:
+        complex(int real, int imaginary = 0) {
+            real = real, imaginary = imaginary;
+            if (imaginary&gt;-1)
+                cout &lt;&lt; real &lt;&lt; " + " &lt;&lt; imaginary &lt;&lt; "i" &lt;&lt; endl;
+            else
+                cout &lt;&lt; real &lt;&lt; " - " &lt;&lt; imaginary*(-1) &lt;&lt; "i" &lt;&lt; endl;
+        }
+
+        ~complex() {
+            cout &lt;&lt; "Destructor is invoked" &lt;&lt; endl;
+        }
+};
+
+int main() {
+    complex number(1, -1);
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA05_2.cpp>
+		<div class='question'>ii. Create a class which stores time in hh:mm format. Include all the constructors. The parameterized constructor should initialize the minute value to zero, if it is not provided.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class _time {
+    int hour, minute;
+    public:
+        _time(int hh, int mm = 0) {
+            hour = hh;
+            minute = mm;
+            cout &lt;&lt;  hh &lt;&lt; ":" &lt;&lt; mm &lt;&lt; endl;
+        }
+};
+
+int main() {
+    _time t1(10);
+    _time t2(10, 10);
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA05_3.cpp>
+		<div class='question'>iii. Create a class which stores a sting and its length as data members. Include all the constructors. Include a member function to join two strings and display the concatenated string.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class _string {
+    string s;
+    int l;
+    public:
+        _string(string ss) {
+            s = ss;
+            l = ss.length();
+            cout &lt;&lt; "String: " &lt;&lt;  s &lt;&lt; "\nLength: " &lt;&lt; l &lt;&lt; endl;
+        }
+        string merge(string s1, string s2) {
+            string merged = s1+s2;
+            cout &lt;&lt; "String after merging: " &lt;&lt; merged &lt;&lt; endl;
+            return merged;
+        }
+};
+
+int main() {
+    _string s("Piyush Somani");
+    s.merge("piyush ", "somani");
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA05_4.cpp>
+		<div class='question'>iv. WAP to demonstrate the order of call of constructors and destructors for a class.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class c{
+    public:
+        c(int a) {
+            cout &lt;&lt; "Constructor with 1 arguement" &lt;&lt; endl;
+        }
+        c(int a, int b, int c = 10) {
+            cout &lt;&lt; "Constructor with 2 argument and 1 default arguement" &lt;&lt; endl;
+        }
+        ~c() {
+            cout &lt;&lt; "Destructor is invoked" &lt;&lt; endl;
+        }
+};
+
+int main() {
+    c c_1(10);  
+    c c_2(10, 20);
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+	<div class=LA05_5.cpp>
+		<div class='question'>v. WAP to count number of objects created from a class using concept of static data members and static member function.
+		</div>
+		<div class='answer'>
+			<button>copy</button>
+			<pre>#include&lt;iostream&gt;
+using namespace std;
+
+class _c1 {
+    static int c;
+    public:
+        _c1(int a) {
+            c++;
+        }
+        friend void display_count(_c1);
+};
+
+void display_count(_c1 a) {
+    cout &lt;&lt; a.c &lt;&lt; " times object has been created" &lt;&lt; endl;
+}
+
+int _c1::c;
+
+int main() {
+    _c1 a(1);
+    _c1 b(2);
+    _c1 c(3);
+    _c1 d(4);
+    _c1 e(5);
+    display_count(a);
+    return 0;
+}
+			</pre>
+		</div>
+	</div>
+<script>
+    var btn = document.getElementsByTagName('button');
+    for (var i = 0;i<btn.length;i++) {
+        btn[i].addEventListener('click', function () {
+            var copyText = this.nextElementSibling.textContent;
+            var n = document.createElement('input');
+            n.value = copyText;
+            n.select();
+            n.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(n.value);
+            n.remove();
+        })
+    }
+</script>
+</body>
+</html>
