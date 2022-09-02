@@ -40,10 +40,10 @@
 using namespace std;
 
 class complex {
-    int real, imaginary;
+    int r, i;
     public:
         complex(int real, int imaginary = 0) {
-            real = real, imaginary = imaginary;
+            r = real, i = imaginary;
             if (imaginary&gt;-1)
                 cout &lt;&lt; real &lt;&lt; " + " &lt;&lt; imaginary &lt;&lt; "i" &lt;&lt; endl;
             else
@@ -114,7 +114,7 @@ class _string {
 
 int main() {
     _string s("Piyush Somani");
-    s.merge("piyush ", "somani");
+    string n = s.merge("piyush ", "somani");
     return 0;
 }
 			</pre>
@@ -163,14 +163,15 @@ class _c1 {
         _c1(int a) {
             c++;
         }
-        friend void display_count(_c1);
+        static void display_count();
 };
 
-void display_count(_c1 a) {
-    cout &lt;&lt; a.c &lt;&lt; " times object has been created" &lt;&lt; endl;
+void _c1::display_count() {
+    cout &lt;&lt; c &lt;&lt; " times object has been created" &lt;&lt; endl;
 }
 
 int _c1::c;
+
 
 int main() {
     _c1 a(1);
@@ -178,7 +179,7 @@ int main() {
     _c1 c(3);
     _c1 d(4);
     _c1 e(5);
-    display_count(a);
+    _c1::display_count();
     return 0;
 }
 			</pre>
